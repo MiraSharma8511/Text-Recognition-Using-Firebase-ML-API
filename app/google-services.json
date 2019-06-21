@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "44153431449",
+    "firebase_url": "https://textrecognization-1a36b.firebaseio.com",
+    "project_id": "textrecognization-1a36b",
+    "storage_bucket": "textrecognization-1a36b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44153431449:android:98d3cae45819f81e",
+        "android_client_info": {
+          "package_name": "com.mira.textrecogization"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44153431449-i3esbb4v9vd0hj7g5o45l2hjlaft2og8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mira.textrecogization",
+            "certificate_hash": "506f698da54936236bb9be08eaada5f5a2a13d18"
+          }
+        },
+        {
+          "client_id": "44153431449-lq0s14o8ahjje31au7b5aqbpuc8vkjc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCz1b0qayulUdacbuECvDzB3_h17cIHNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44153431449-lq0s14o8ahjje31au7b5aqbpuc8vkjc6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
