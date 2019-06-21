@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     Bitmap bitmap;
     ImageView iv_Image;
     TextView tv_Result;
-    //FirebaseVisionText textResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +67,6 @@ public class MainActivity extends AppCompatActivity {
         bitmap = ((BitmapDrawable)iv_Image.getDrawable()).getBitmap();
         image = FirebaseVisionImage.fromBitmap(bitmap);
         recognizeText(image);
-        //processTextBlock(textResult);
-//        Image media = android.media.Image();
-  //      FirebaseVisionImage fvimage = FirebaseVisionImage.fromMediaImage(media, 0);
     }
 
     @Override
@@ -91,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        //runTextRecognition();
         return super.onOptionsItemSelected(item);
     }
     ArrayList<String> resultvalues = new ArrayList<String>();
@@ -115,14 +110,12 @@ public class MainActivity extends AppCompatActivity {
                                 for (FirebaseVisionText.TextBlock block : firebaseVisionText.getTextBlocks()) {
                                     Rect boundingBox = block.getBoundingBox();
                                     Point[] cornerPoints = block.getCornerPoints();
-                                    processTextBlock(firebaseVisionText);
-
 
                                     for (FirebaseVisionText.Line line: block.getLines()) {
                                         // ...
                                         for (FirebaseVisionText.Element element: line.getElements()) {
 
-                                            // ...
+                                            // ... Show Text Here
                                             if(resultvalues.size()==1) {
                                                 tv_Result.setText(resultvalues.get(0));
                                             } else
@@ -147,97 +140,6 @@ public class MainActivity extends AppCompatActivity {
                                 });
 
         // [END run_detector]
-    }
-
-      private void processTextBlock(FirebaseVisionText result) {
-        // [START mlkit_process_text_block]
-        for (FirebaseVisionText.TextBlock block: result.getTextBlocks()) {
-            String blockText = block.getText();
-            Float blockConfidence = block.getConfidence();
-            List<RecognizedLanguage> blockLanguages = block.getRecognizedLanguages();
-            Point[] blockCornerPoints = block.getCornerPoints();
-            Rect blockFrame = block.getBoundingBox();
-            for (FirebaseVisionText.Line line: block.getLines()) {
-                String lineText = line.getText();
-                Float lineConfidence = line.getConfidence();
-                List<RecognizedLanguage> lineLanguages = line.getRecognizedLanguages();
-                Point[] lineCornerPoints = line.getCornerPoints();
-                Rect lineFrame = line.getBoundingBox();
-                for (FirebaseVisionText.Element element: line.getElements()) {
-                    String elementText = element.getText();
-                    Float elementConfidence = element.getConfidence();
-                    List<RecognizedLanguage> elementLanguages = element.getRecognizedLanguages();
-                    Point[] elementCornerPoints = element.getCornerPoints();
-                    Rect elementFrame = element.getBoundingBox();
-                }
-            }
-        }
-        // [END mlkit_process_text_block]
-    }
-
-    private FirebaseVisionDocumentTextRecognizer getLocalDocumentRecognizer() {
-        // [START mlkit_local_doc_recognizer]
-        FirebaseVisionDocumentTextRecognizer detector = FirebaseVision.getInstance()
-                .getCloudDocumentTextRecognizer();
-        // [END mlkit_local_doc_recognizer]
-
-        return detector;
-    }
-
-
-    private void processDocumentImage() {
-        // Dummy variables
-        FirebaseVisionDocumentTextRecognizer detector = getLocalDocumentRecognizer();
-        FirebaseVisionImage myImage = FirebaseVisionImage.fromByteArray(new byte[]{},
-                new FirebaseVisionImageMetadata.Builder().build());
-
-        // [START mlkit_process_doc_image]
-        detector.processImage(myImage)
-                .addOnSuccessListener(new OnSuccessListener<FirebaseVisionDocumentText>() {
-                    @Override
-                    public void onSuccess(FirebaseVisionDocumentText result) {
-                        // Task completed successfully
-                        // ...
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Task failed with an exception
-                        // ...
-                    }
-                });
-        // [END mlkit_process_doc_image]
-    }
-
-    private void processDocumentTextBlock(FirebaseVisionDocumentText result) {
-        // [START mlkit_process_document_text_block]
-        String resultText = result.getText();
-        for (FirebaseVisionDocumentText.Block block: result.getBlocks()) {
-            String blockText = block.getText();
-            Float blockConfidence = block.getConfidence();
-            List<RecognizedLanguage> blockRecognizedLanguages = block.getRecognizedLanguages();
-            Rect blockFrame = block.getBoundingBox();
-            for (FirebaseVisionDocumentText.Paragraph paragraph: block.getParagraphs()) {
-                String paragraphText = paragraph.getText();
-                Float paragraphConfidence = paragraph.getConfidence();
-                List<RecognizedLanguage> paragraphRecognizedLanguages = paragraph.getRecognizedLanguages();
-                Rect paragraphFrame = paragraph.getBoundingBox();
-                for (FirebaseVisionDocumentText.Word word: paragraph.getWords()) {
-                    String wordText = word.getText();
-                    Float wordConfidence = word.getConfidence();
-                    List<RecognizedLanguage> wordRecognizedLanguages = word.getRecognizedLanguages();
-                    Rect wordFrame = word.getBoundingBox();
-                    for (FirebaseVisionDocumentText.Symbol symbol: word.getSymbols()) {
-                        String symbolText = symbol.getText();
-                        Float symbolConfidence = symbol.getConfidence();
-                        List<RecognizedLanguage> symbolRecognizedLanguages = symbol.getRecognizedLanguages();
-                        Rect symbolFrame = symbol.getBoundingBox();
-                    }
-                }
-            }
-        }
-        // [END mlkit_process_document_text_block]
     }
 
 }
